@@ -1,646 +1,2140 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AISH 스페셜 Expert 교육과정 신청</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142b40">
+  <title>AISH 스페셜 Expert 교육과정 | 아는 AI에서 해내는 AI로</title>
+  <meta name="description" content="AISH 중급과정 회원 전용 스페셜 Expert 교육과정. 8개 실전 과정, 5주 집중 실습, 선착순 20명. 2027년 1월 26일~30일 접수.">
+  <meta property="og:title" content="AI, 아는 것과 해내는 것은 다릅니다 | AISH Expert">
+  <meta property="og:description" content="내 업무에 바로 쓰는 8개 실전 과정. 중급 회원 전용 · 선착순 20명 · 접수 2027.1.26~1.30">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23142b40'/%3E%3Ctext x='20' y='29' font-family='Arial' font-size='27' text-anchor='middle' fill='%23eabf73'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Pretendard', 'sans-serif'],
-                    },
-                    colors: {
-                        navy: {
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        },
-                        gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body { font-family: 'Pretendard', sans-serif; }
-        
-        /* Scroll Animation Classes */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Custom Checkbox & Radio Style */
-        input[type="checkbox"], input[type="radio"] {
-            accent-color: #f59e0b;
-        }
+  <style>
+    :root {
+      --navy: #142b40;
+      --ink: #1b3042;
+      --muted: #65727e;
+      --gold: #e8bc76;
+      --paper: #f8f7f3;
+      --line: #e3e6e7;
+      --red: #ac3434;
+      --radius: 20px;
+    }
 
-        /* Error Text */
-        .error-message {
-            display: none;
-            color: #ef4444;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-        .input-error {
-            border-color: #ef4444 !important;
-        }
-    </style>
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Pretendard, 'Noto Sans KR', -apple-system,
+        BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button, a, input, summary { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid #be7a26;
+      outline-offset: 5px;
+    }
+
+    ::selection { background: #f1d7aa; color: var(--navy); }
+
+    .wrap {
+      width: min(1120px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    .skip {
+      position: fixed;
+      top: -80px;
+      left: 16px;
+      z-index: 100;
+      background: white;
+      padding: 10px;
+    }
+
+    .skip:focus { top: 10px; }
+
+    .header {
+      height: 80px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand strong {
+      font-size: 28px;
+      letter-spacing: -1.5px;
+      font-weight: 900;
+    }
+
+    .brand small {
+      font-size: 12px;
+      line-height: 1.35;
+      border-left: 1px solid #ccd1d4;
+      padding-left: 12px;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-cta {
+      padding: 9px 20px;
+      background: var(--navy);
+      color: white;
+      border-radius: 8px;
+    }
+
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 2.2px;
+      font-weight: 700;
+      color: #866131;
+      margin-bottom: 16px;
+    }
+
+    .hero {
+      padding: 76px 0 60px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid #d8d8d0;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #fff8;
+    }
+
+    .badge:before {
+      content: '';
+      height: 6px;
+      width: 6px;
+      border-radius: 50%;
+      background: #b48440;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 4.6vw, 58px);
+      line-height: 1.25;
+      letter-spacing: -2.8px;
+      margin: 25px 0 22px;
+      font-weight: 800;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #96703d;
+    }
+
+    .hero-copy {
+      color: #5d6871;
+      font-size: 16px;
+      line-height: 1.9;
+      margin: 0 0 25px;
+    }
+
+    .hero-copy strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 34px;
+      background: var(--gold);
+      color: var(--navy);
+      border: 1px solid transparent;
+      border-radius: 9px;
+      padding: 15px 25px;
+      font-weight: 750;
+      transition: background .2s, transform .2s;
+      min-height: 54px;
+    }
+
+    .button:hover {
+      background: #f0c98c;
+      transform: translateY(-2px);
+    }
+
+    .button span[aria-hidden] {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .urgency {
+      font-size: 12px;
+      color: #737066;
+      margin: 12px 0 0;
+    }
+
+    .expert-pass {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 22px;
+      padding: 34px;
+      box-shadow: 0 22px 40px #122b4018;
+      position: relative;
+    }
+
+    .pass-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #d8bb8c;
+      letter-spacing: 2px;
+      font-size: 10px;
+    }
+
+    .pass-head b {
+      font-size: 14px;
+      color: #fff;
+      letter-spacing: 0;
+    }
+
+    .pass-title {
+      font-family: Georgia, serif;
+      font-size: 77px;
+      line-height: 1.25;
+      color: #eac996;
+      font-weight: 400;
+      margin: 32px 0 0;
+      letter-spacing: -3px;
+    }
+
+    .pass-sub {
+      font-size: 18px;
+      letter-spacing: -.5px;
+      margin: 0 0 25px;
+    }
+
+    .pass-rule {
+      height: 1px;
+      background: #ffffff25;
+      margin: 26px 0;
+    }
+
+    .pass-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 16px;
+    }
+
+    .pass-meta small {
+      color: #aebbc5;
+      display: block;
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .pass-meta b {
+      font-size: 14px;
+      font-weight: 550;
+    }
+
+    .pass-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #aebbc5;
+      margin-top: 30px;
+    }
+
+    .pass-bottom .serial {
+      font-family: monospace;
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 50px;
+      color: #65727b;
+      font-size: 13px;
+    }
+
+    .hero-note:before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: #b79b73;
+    }
+
+    .hero-note strong {
+      font-weight: 600;
+      color: #695439;
+    }
+
+    .section { padding: 90px 0; }
+    .section-head { margin-bottom: 36px; }
+
+    .section-head h2 {
+      font-size: clamp(28px, 3vw, 38px);
+      letter-spacing: -1.5px;
+      line-height: 1.35;
+      margin: 0 0 14px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .recommend {
+      display: grid;
+      grid-template-columns: .9fr 1.2fr;
+      gap: 70px;
+    }
+
+    .checks {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .checks li {
+      display: flex;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+
+    .checks li:first-child { padding-top: 0; }
+
+    .check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #f2eee5;
+      color: #907044;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .light { background: var(--paper); }
+
+    .head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #d9d7cf;
+      border-radius: 99px;
+      font-size: 12px;
+      white-space: nowrap;
+      margin-bottom: 5px;
+      color: #63717c;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .course {
+      padding: 27px 28px;
+      background: #fff;
+      border: 1px solid #e2e3df;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .course:hover {
+      border-color: #c9b18d;
+      box-shadow: 0 8px 22px #142b4008;
+    }
+
+    .course-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f1ea;
+      border-radius: 11px;
+      height: 44px;
+      width: 44px;
+      font-size: 22px;
+      color: #8c6d42;
+    }
+
+    .course-no {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #9b9fa3;
+      font-family: monospace;
+    }
+
+    .course h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.5;
+      letter-spacing: -.6px;
+      max-width: 430px;
+    }
+
+    .instructor {
+      font-size: 12px;
+      color: #6c747a;
+      margin: 0 0 13px;
+    }
+
+    .instructor b {
+      font-weight: 650;
+      color: #354859;
+    }
+
+    .course-desc {
+      margin: 0 0 23px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .outcome {
+      margin-top: auto;
+      padding: 15px 17px;
+      border-radius: 9px;
+      background: #f7f8f8;
+      font-size: 13px;
+    }
+
+    .outcome small {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .6px;
+      color: #85663a;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .teachers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .teacher {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .portrait {
+      height: 165px;
+      background: #f1f2ef;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: #768187;
+    }
+
+    .portrait span {
+      font-family: Georgia, serif;
+      font-size: 45px;
+      color: #a3adaf;
+      font-style: italic;
+      line-height: 1.3;
+    }
+
+    .portrait small {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .teacher-body { padding: 23px 20px; }
+
+    .teacher h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .teacher h3 small {
+      font-size: 11px;
+      font-weight: 400;
+      color: #78838b;
+      margin-left: 7px;
+    }
+
+    .teacher p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 48px;
+    }
+
+    .teacher .bio {
+      margin-top: 17px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: #8a9196;
+      min-height: 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 65px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid #dddeda;
+      padding: 16px 12px;
+      vertical-align: top;
+    }
+
+    th {
+      width: 105px;
+      font-weight: 650;
+      color: #65717c;
+    }
+
+    td { font-weight: 500; }
+    tr:first-child th, tr:first-child td { padding-top: 0; }
+    td strong { font-size: 18px; }
+
+    .small-note {
+      font-size: 12px;
+      color: #7c858b;
+      margin: 16px 0 0;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .feature {
+      border-top: 2px solid #d7bd98;
+      padding-top: 22px;
+    }
+
+    .feature-no {
+      color: #a18252;
+      font-family: Georgia, serif;
+      font-size: 25px;
+    }
+
+    .feature h3 {
+      font-size: 20px;
+      line-height: 1.5;
+      margin: 15px 0 12px;
+      letter-spacing: -.5px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .apply-section {
+      background: var(--navy);
+      padding: 86px 0;
+    }
+
+    .apply-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 65px;
+      align-items: start;
+    }
+
+    .apply-intro {
+      color: #fff;
+      padding-top: 15px;
+    }
+
+    .apply-intro .eyebrow { color: var(--gold); }
+
+    .apply-intro h2 {
+      font-size: 38px;
+      line-height: 1.4;
+      letter-spacing: -1.5px;
+      margin: 0 0 22px;
+    }
+
+    .apply-intro h2 em {
+      color: #eac996;
+      font-style: normal;
+    }
+
+    .apply-intro p {
+      color: #b8c4cc;
+      font-size: 15px;
+    }
+
+    .apply-facts {
+      margin: 30px 0;
+      border-top: 1px solid #ffffff25;
+      border-bottom: 1px solid #ffffff25;
+      padding: 22px 0;
+      display: flex;
+      gap: 28px;
+    }
+
+    .apply-facts b {
+      display: block;
+      color: #eac996;
+      font-size: 23px;
+    }
+
+    .apply-facts small {
+      font-size: 11px;
+      color: #b8c4cc;
+    }
+
+    .form-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .form-card h3 {
+      font-size: 21px;
+      margin: 0 0 4px;
+      letter-spacing: -.5px;
+    }
+
+    .form-summary {
+      font-size: 12px;
+      color: #697680;
+      margin: 0 0 24px;
+    }
+
+    .required-note {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 13px;
+      margin-bottom: 22px;
+      font-size: 13px;
+    }
+
+    .required-note small {
+      font-size: 11px;
+      color: #687680;
+    }
+
+    .required {
+      color: #a36923;
+      margin-left: 3px;
+    }
+
+    .field { margin-bottom: 19px; }
+
+    .field label, .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      border: 1px solid #d5dbdf;
+      border-radius: 7px;
+      padding: 11px 13px;
+      color: var(--ink);
+      background: #fff;
+      min-height: 46px;
+      font-size: 14px;
+    }
+
+    .field input::placeholder { color: #9aa3ab; }
+    .field input:focus { border-color: #9d7b4b; }
+    .field input[aria-invalid=true] { border-color: var(--red); }
+
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 0 0 20px;
+      min-width: 0;
+    }
+
+    legend {
+      padding: 0;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .legend-help {
+      font-size: 11px;
+      font-weight: 400;
+      color: #6d7881;
+      margin-left: 5px;
+    }
+
+    .choices {
+      display: grid;
+      gap: 8px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 12px;
+      border: 1px solid #e1e5e8;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .choice:has(input:checked) {
+      background: #faf5eb;
+      border-color: #b89561;
+    }
+
+    .choice input, .consent input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--navy);
+      flex: 0 0 17px;
+      margin: 2px 0 0;
+    }
+
+    .choice small {
+      display: block;
+      font-size: 11px;
+      color: #73808a;
+    }
+
+    .error {
+      color: var(--red);
+      font-size: 12px;
+      margin: 6px 0 0;
+    }
+
+    .error:empty { display: none; }
+
+    .consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .privacy {
+      margin: 12px 0 19px;
+      font-size: 11px;
+      color: #75808a;
+      background: #f6f7f7;
+      padding: 10px 12px;
+      border-radius: 7px;
+    }
+
+    .privacy summary {
+      cursor: pointer;
+      color: #526573;
+    }
+
+    .privacy p { margin: 8px 0; }
+
+    .submit {
+      width: 100%;
+      font-size: 15px;
+      margin-top: 6px;
+    }
+
+    .submit:disabled {
+      opacity: .65;
+      cursor: wait;
+      transform: none;
+    }
+
+    .form-notice {
+      font-size: 11px;
+      line-height: 1.65;
+      color: #6b7882;
+      margin: 13px 0 0;
+      text-align: center;
+    }
+
+    .status {
+      font-size: 13px;
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 16px;
+      background: #f5f0e6;
+      color: #6c542f;
+    }
+
+    .status:empty { display: none; }
+
+    .status.success {
+      background: #eef6f0;
+      color: #246342;
+    }
+
+    .status.failure {
+      background: #fff1ef;
+      color: #9b3830;
+    }
+
+    .footer { padding: 34px 0; }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .footer-details {
+      font-size: 11px;
+      color: #7e8991;
+      text-align: right;
+    }
+
+    .footer-details p { margin: 3px 0; }
+    .mobile-bar { display: none; }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .motion .reveal.pending {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .motion .reveal {
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    @media (min-width: 1100px) {
+      .hero h1 { white-space: nowrap; }
+    }
+
+    @media (max-width: 950px) {
+      .hero-grid {
+        gap: 30px;
+        grid-template-columns: 1.2fr 1fr;
+      }
+
+      .expert-pass { padding: 26px; }
+
+      .hero h1 {
+        font-size: 43px;
+        letter-spacing: -2px;
+      }
+
+      .pass-title { font-size: 65px; }
+      .recommend, .info-grid, .apply-grid { gap: 36px; }
+      .teachers { grid-template-columns: repeat(2, 1fr); }
+      .apply-intro h2 { font-size: 32px; }
+      .form-card { padding: 25px; }
+      .nav-links { gap: 20px; }
+    }
+
+    @media (max-width: 700px) {
+      html { scroll-padding-top: 20px; }
+      .wrap { width: calc(100% - 40px); }
+      .header { height: 67px; }
+      .brand strong { font-size: 25px; }
+      .brand small { font-size: 10px; }
+      .nav-links > a:not(.nav-cta) { display: none; }
+
+      .nav-cta {
+        font-size: 12px;
+        padding: 8px 14px;
+      }
+
+      .hero { padding: 40px 0 35px; }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 8.9vw, 48px);
+        letter-spacing: -1.7px;
+        margin: 21px 0 18px;
+      }
+
+      .hero-copy {
+        font-size: 14px;
+        line-height: 1.85;
+      }
+
+      .hero .button { width: 100%; }
+      .badge { font-size: 11px; }
+
+      .urgency {
+        text-align: center;
+        font-size: 11px;
+      }
+
+      .expert-pass { padding: 27px; }
+
+      .pass-title {
+        font-size: 70px;
+        margin-top: 22px;
+      }
+
+      .pass-rule { margin: 22px 0; }
+      .pass-bottom { margin-top: 23px; }
+
+      .hero-note {
+        font-size: 11px;
+        margin-top: 28px;
+        gap: 12px;
+      }
+
+      .hero-note:before { width: 18px; }
+      .section { padding: 60px 0; }
+      .section-head { margin-bottom: 28px; }
+
+      .section-head h2 {
+        font-size: 29px;
+        letter-spacing: -1px;
+      }
+
+      .section-head p { font-size: 14px; }
+
+      .recommend, .info-grid, .apply-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .checks li {
+        font-size: 14px;
+        padding: 15px 0;
+      }
+
+      .head-row { display: block; }
+      .head-row .pill { margin-top: 15px; }
+
+      .course-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .course { padding: 24px; }
+      .course h3 { font-size: 19px; }
+      .course-top { margin-bottom: 15px; }
+      .course-desc { font-size: 13px; }
+      .teachers { gap: 13px; }
+      .portrait { height: 132px; }
+      .teacher-body { padding: 18px 14px; }
+      .teacher h3 { font-size: 18px; }
+
+      .teacher p {
+        font-size: 11px;
+        min-height: 42px;
+      }
+
+      .teacher .bio { font-size: 10px; }
+      .info-grid { gap: 10px; }
+
+      th, td {
+        font-size: 13px;
+        padding: 14px 5px;
+      }
+
+      th { width: 77px; }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .feature {
+        position: relative;
+        padding: 21px 0 0 46px;
+      }
+
+      .feature-no {
+        position: absolute;
+        left: 0;
+        top: 16px;
+      }
+
+      .feature h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+
+      .feature p { font-size: 13px; }
+      .apply-section { padding: 55px 0; }
+      .apply-intro { padding-top: 0; }
+
+      .apply-intro h2 {
+        font-size: 32px;
+        margin-bottom: 15px;
+      }
+
+      .apply-intro p { font-size: 14px; }
+      .apply-facts { margin: 22px 0 28px; }
+
+      .form-card {
+        padding: 24px 20px;
+        border-radius: 15px;
+      }
+
+      .field input { font-size: 16px; }
+      .form-card h3 { font-size: 20px; }
+      .footer { padding: 28px 0 115px; }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .footer-details { text-align: left; }
+
+      .mobile-bar {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 11px 20px calc(11px + env(safe-area-inset-bottom));
+        background: #fffffff5;
+        backdrop-filter: blur(12px);
+        border-top: 1px solid #e5e7e8;
+        z-index: 20;
+        box-shadow: 0 -5px 20px #142b4009;
+      }
+
+      .mobile-bar small {
+        font-size: 10px;
+        display: block;
+        color: #6e7983;
+      }
+
+      .mobile-bar strong { font-size: 13px; }
+
+      .mobile-bar .button {
+        flex: 1;
+        min-height: 46px;
+        padding: 10px 16px;
+        font-size: 14px;
+        gap: 20px;
+      }
+
+      .mobile-bar.hide { display: none; }
+      body { scroll-padding-bottom: 90px; }
+      .error, .status { scroll-margin-bottom: 120px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *:before, *:after {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .motion .reveal.pending {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased overflow-x-hidden">
 
-    <header class="bg-navy-900 text-white relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fbbf24 1px, transparent 1px); background-size: 30px 30px;"></div>
-        
-        <div class="max-w-5xl mx-auto px-6 py-20 md:py-32 relative z-10 flex flex-col items-center text-center">
-            <span class="inline-block bg-gold-500 text-navy-900 font-bold px-4 py-1.5 rounded-full text-sm md:text-base mb-6 shadow-[0_0_15px_rgba(245,158,11,0.5)]">
-                AISH 중급과정 회원 전용 · 선착순 20명
-            </span>
-            
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                AI, 아는 것과 <br class="md:hidden"/> <span class="text-gold-400">해내는 것</span>은 다릅니다
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+
+  <header class="header">
+    <nav class="wrap nav" aria-label="주요 메뉴">
+      <a href="#" class="brand" aria-label="AISH 교육협회 홈">
+        <strong>AISH<span style="color:#ad8752">.</span></strong>
+        <small>교육협회<br>스페셜 Expert 과정</small>
+      </a>
+
+      <div class="nav-links">
+        <a href="#curriculum">교육과정</a>
+        <a href="#teachers">강사진</a>
+        <a href="#information">교육 안내</a>
+        <a href="#apply" class="nav-cta">과정 신청하기 ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <span class="badge">AISH 중급과정 회원 전용 · 선착순 20명</span>
+
+            <h1 id="hero-title">
+              AI, 아는 것과<br>
+              <em>해내는 것은 다릅니다</em>
             </h1>
-            
-            <p class="text-lg md:text-2xl text-gray-300 mb-2 font-light">
-                단 5주, 이론을 넘어 실전으로.
+
+            <p class="hero-copy">
+              단 5주, 이론을 넘어 실전으로.<br>
+              강의가 끝나는 날, 당신의 손에는<br>
+              <strong>내 이름의 결과물이 남습니다.</strong>
             </p>
-            <p class="text-lg md:text-2xl text-gray-300 mb-10 font-light">
-                강의가 끝나는 날, 당신의 손에는 <strong class="text-white font-semibold">내 이름의 결과물</strong>이 남습니다.
-            </p>
-            
-            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 mb-10 w-full max-w-3xl border border-white/20 text-left md:text-center shadow-2xl">
-                <p class="text-gold-400 font-bold text-xl md:text-2xl mb-6 text-center">"5주 후, Expert라는 이름이 어색하지 않게"</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg">
-                    <div class="flex items-center gap-3">
-                        <i class="ph-fill ph-calendar-blank text-2xl text-gold-400"></i>
-                        <span><strong class="text-white">일정:</strong> 27.2.11 ~ 3.18 (5주)</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <i class="ph-fill ph-clock text-2xl text-gold-400"></i>
-                        <span><strong class="text-white">시간:</strong> 매주 목 저녁 9시~11시</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <i class="ph-fill ph-desktop text-2xl text-gold-400"></i>
-                        <span><strong class="text-white">방식:</strong> Zoom 실시간 강의+실습</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <i class="ph-fill ph-credit-card text-2xl text-gold-400"></i>
-                        <span><strong class="text-white">비용:</strong> 200,000원</span>
-                    </div>
-                </div>
-            </div>
-            
-            <a href="#apply-section" class="bg-gold-500 hover:bg-gold-400 text-navy-900 text-xl font-bold py-4 px-10 rounded-full transition duration-300 transform hover:scale-105 shadow-[0_10px_25px_rgba(245,158,11,0.4)] w-full md:w-auto text-center">
-                지금 Expert 되기
+
+            <a class="button" href="#apply">
+              지금 Expert 되기
+              <span aria-hidden="true">↗</span>
             </a>
-            
-            <p class="mt-4 text-sm md:text-base text-gray-400 flex items-center gap-2">
-                <i class="ph-fill ph-warning-circle text-gold-500"></i>
-                접수 1.26~1.30, 단 5일 · 20명 마감 시 조기 종료
+
+            <p class="urgency">
+              접수 1.26~1.30, 단 5일 · 20명 마감 시 조기 종료
             </p>
-        </div>
-    </header>
+          </div>
 
-    <section class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-6 fade-in-up">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">이런 분들께 <span class="text-navy-900">강력 추천</span>합니다</h2>
-            <p class="text-center text-gray-500 mb-10">해당되는 항목이 있다면, 이 과정이 당신을 위한 것입니다.</p>
-            
-            <div class="space-y-4">
-                <div class="flex items-start gap-4 p-5 md:p-6 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-green-100 text-green-600 rounded-full p-1 mt-1 shrink-0">
-                        <i class="ph-bold ph-check text-xl"></i>
-                    </div>
-                    <p class="text-lg md:text-xl text-gray-700 pt-0.5">AI 도구는 써봤는데, 실제 <strong>업무 결과물로 연결이 안 되는 분</strong></p>
-                </div>
-                <div class="flex items-start gap-4 p-5 md:p-6 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-green-100 text-green-600 rounded-full p-1 mt-1 shrink-0">
-                        <i class="ph-bold ph-check text-xl"></i>
-                    </div>
-                    <p class="text-lg md:text-xl text-gray-700 pt-0.5">회사 홍보물, 영상, 홈페이지를 <strong>외주 없이 직접 만들고 싶은 분</strong></p>
-                </div>
-                <div class="flex items-start gap-4 p-5 md:p-6 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-green-100 text-green-600 rounded-full p-1 mt-1 shrink-0">
-                        <i class="ph-bold ph-check text-xl"></i>
-                    </div>
-                    <p class="text-lg md:text-xl text-gray-700 pt-0.5">정부과제, 제안서, 강의자료 작성에 <strong>시간이 너무 많이 드는 분</strong></p>
-                </div>
-                <div class="flex items-start gap-4 p-5 md:p-6 bg-gray-50 rounded-xl border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-green-100 text-green-600 rounded-full p-1 mt-1 shrink-0">
-                        <i class="ph-bold ph-check text-xl"></i>
-                    </div>
-                    <p class="text-lg md:text-xl text-gray-700 pt-0.5">내 이름으로 된 책, <strong>내 브랜드를 확실하게 갖고 싶은 분</strong></p>
-                </div>
+          <aside class="expert-pass" aria-label="스페셜 Expert 과정 핵심 정보">
+            <div class="pass-head">
+              <b>AISH.</b>
+              <span>MEMBERS ONLY / 2027</span>
             </div>
+
+            <div class="pass-title">Expert.</div>
+            <p class="pass-sub">배움을 넘어, 나의 결과물로.</p>
+            <div class="pass-rule"></div>
+
+            <div class="pass-meta">
+              <div>
+                <small>📅 교육기간</small>
+                <b>2027.2.11~3.18 · 5주</b>
+              </div>
+              <div>
+                <small>🌙 교육시간</small>
+                <b>매주 저녁 9시~11시</b>
+              </div>
+              <div>
+                <small>💻 교육방법</small>
+                <b>Zoom 실시간 강의 + 실습</b>
+              </div>
+              <div>
+                <small>💰 수강료</small>
+                <b>200,000원</b>
+              </div>
+            </div>
+
+            <div class="pass-bottom">
+              <span>SPECIAL EXPERT PROGRAM</span>
+              <span class="serial">20 MEMBERS</span>
+            </div>
+          </aside>
         </div>
+
+        <div class="hero-note">
+          AISH SPECIAL PROGRAM
+          <strong>5주 후, Expert라는 이름이 어색하지 않게</strong>
+        </div>
+      </div>
     </section>
 
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gold-600 font-bold text-sm tracking-widest uppercase mb-2 block">Curriculum</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">8개의 확실한 <span class="text-navy-900">결과물</span></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">수업이 끝나면 이 중 하나는 반드시 당신의 무기가 됩니다.<br/>원하는 결과물을 선택해 집중적으로 완성해 보세요.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">01</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-file-text"></i></div>
-                    <h3 class="text-xl font-bold mb-2">회사 정부과제 사업계획서 전문가 되기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 이지혜</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">합격하는 사업계획서의 비밀, AI로 완성하는 기획과 작성의 A to Z. 막막했던 서류 작업이 쉬워집니다.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">내 회사에 딱 맞는 완벽한 <strong>사업계획서 초안</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">02</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-video-camera"></i></div>
-                    <h3 class="text-xl font-bold mb-2">회사제품 유튜브 CF 동영상 제작하기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 평주영</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">단숨에 시선을 사로잡는 우리 회사 제품 홍보 영상. 기획부터 컷 편집, AI 더빙까지 한 번에 끝냅니다.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">실무에 바로 쓰는 고퀄리티 <strong>유튜브 CF 영상 1편</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">03</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-book-open-text"></i></div>
-                    <h3 class="text-xl font-bold mb-2">AI로 5주 만에 교보문고 전자책 출간하기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 배소민</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">내 지식과 경험을 AI와 함께 엮어 수익화하는 마법. 내 이름이 적힌 저서로 퍼스널 브랜딩을 시작하세요.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">교보문고 정식 등록용 <strong>전자책(EPUB) 및 표지</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">04</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-browser"></i></div>
-                    <h3 class="text-xl font-bold mb-2">AI로 회사 랜딩페이지 1시간 만에 완성하기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 조효원</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">코딩 한 줄 없이 AI가 기획하고 디자인하는 랜딩페이지. 비싼 외주 비용 없이 내 손으로 직접 만듭니다.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">즉시 고객을 받을 수 있는 <strong>반응형 웹사이트</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">05</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-robot"></i></div>
-                    <h3 class="text-xl font-bold mb-2">AI 업무자동화 에이전트 완성하기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 조효원</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">나 대신 24시간 일하는 똑똑한 맞춤형 AI 비서 구축. 반복되는 단순 업무에서 완벽하게 해방되세요.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">내 업무에 특화된 <strong>업무 자동화 맞춤형 봇</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">06</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-presentation-chart"></i></div>
-                    <h3 class="text-xl font-bold mb-2">NotebookLM 활용 제안서·강의자료 만들기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 이지혜</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">방대한 자료를 순식간에 분석하여 완벽한 문서로. 구글의 최신 AI 기술로 전문적인 문서를 뚝딱 만듭니다.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">압도적인 퀄리티의 <strong>논리적 제안서 및 강의자료</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">07</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-google-logo"></i></div>
-                    <h3 class="text-xl font-bold mb-2">생초보를 위한 구글 워크스페이스 정복하기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 배소민</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">이메일, 문서, 클라우드, 그리고 제미나이 AI까지! 기본기부터 탄탄하게 다져 업무 효율을 200% 끌어올립니다.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">제미나이가 결합된 <strong>나만의 스마트 워크 환경 세팅</strong></p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl transition-shadow relative overflow-hidden group fade-in-up">
-                    <div class="absolute top-0 right-0 bg-navy-900 text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-xl">08</div>
-                    <div class="text-gold-500 text-4xl mb-4"><i class="ph-fill ph-film-strip"></i></div>
-                    <h3 class="text-xl font-bold mb-2">미드저니·캔바·제미나이 활용 홍보영상 만들기</h3>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold">강사: 평주영</p>
-                    <p class="text-gray-600 mb-6 line-clamp-2">세 가지 최강의 AI 디자인 툴을 결합하여 압도적인 시각적 브랜딩 콘텐츠를 기획하고 제작합니다.</p>
-                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
-                        <p class="text-orange-800 font-bold text-sm mb-1">이런 결과물을 얻어요</p>
-                        <p class="text-orange-900">감각적인 <strong>숏폼 및 브랜드 홍보 영상</strong></p>
-                    </div>
-                </div>
-            </div>
+    <section class="section">
+      <div class="wrap recommend reveal">
+        <div class="section-head">
+          <span class="eyebrow">FOR YOUR NEXT STEP</span>
+          <h2>써본 AI에서,<br>일을 해내는 AI로.</h2>
+          <p>
+            이런 고민이 있었다면,<br>
+            이제 다음 단계로 나아갈 시간입니다.
+          </p>
         </div>
+
+        <ul class="checks">
+          <li>
+            <span class="check" aria-hidden="true">✓</span>
+            AI 도구는 써봤는데, 실제 업무 결과물로 연결이 안 되는 분
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">✓</span>
+            회사 홍보물·영상·홈페이지를 외주 없이 직접 만들고 싶은 분
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">✓</span>
+            정부과제, 제안서, 강의자료 작성에 시간이 너무 많이 드는 분
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">✓</span>
+            내 이름으로 된 책, 내 브랜드를 갖고 싶은 분
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">✓</span>
+            퇴근 후 집에서 배우며, 반복 업무를 줄이고 싶은 분
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section class="py-20 bg-navy-900 text-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 fade-in-up">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gold-400">Expert 과정만의 특별함</h2>
-                <p class="text-gray-300">왜 이 과정이 달라야 할까요? 철저하게 실전과 결과에 집중했습니다.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-navy-800 p-8 rounded-2xl border border-gray-700 text-center fade-in-up">
-                    <div class="bg-gold-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center text-navy-900 text-3xl mb-6">
-                        <i class="ph-fill ph-hammer"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">내 업무 밀착 실습</h3>
-                    <p class="text-gray-400 leading-relaxed">이론이나 남의 사례가 아닙니다. 수업 시간에 <strong>"내 회사, 내 업무"</strong>의 결과물을 직접 만들어냅니다.</p>
-                </div>
-                <div class="bg-navy-800 p-8 rounded-2xl border border-gray-700 text-center fade-in-up" style="transition-delay: 0.1s;">
-                    <div class="bg-gold-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center text-navy-900 text-3xl mb-6">
-                        <i class="ph-fill ph-moon-stars"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">퇴근 후 편안하게</h3>
-                    <p class="text-gray-400 leading-relaxed">바쁜 직장인과 대표님들을 위해 <strong>저녁 9시부터 11시까지</strong>, 집에서 Zoom으로 편하게 참여하세요.</p>
-                </div>
-                <div class="bg-navy-800 p-8 rounded-2xl border border-gray-700 text-center fade-in-up" style="transition-delay: 0.2s;">
-                    <div class="bg-gold-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center text-navy-900 text-3xl mb-6">
-                        <i class="ph-fill ph-users-three"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">20명 소수정예 피드백</h3>
-                    <p class="text-gray-400 leading-relaxed">중급 회원을 위한 심화 과정인 만큼, 선착순 20명만 모집하여 <strong>꼼꼼한 실습 피드백</strong>을 제공합니다.</p>
-                </div>
-            </div>
+    <section class="section light" id="curriculum">
+      <div class="wrap">
+        <div class="section-head head-row reveal">
+          <div>
+            <span class="eyebrow">8 PRACTICAL COURSES</span>
+            <h2>배운 만큼, 손에 남는 8가지 실전.</h2>
+            <p>
+              내 회사와 내 업무를 주제로, 전문가의 안내를 따라 직접 완성합니다.
+            </p>
+          </div>
+          <span class="pill">8개 과정 중 1개 선택</span>
         </div>
+
+        <div class="course-grid" id="course-grid"></div>
+
+        <noscript>
+          <p>
+            과정 목록과 신청 폼을 이용하려면 브라우저에서 JavaScript를 켜주세요.
+          </p>
+        </noscript>
+      </div>
     </section>
 
-    <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 fade-in-up">결과를 책임질 <span class="text-navy-900">전문 강사진</span></h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Instructor 1 -->
-                <div class="text-center fade-in-up">
-                    <div class="w-40 h-40 mx-auto rounded-full bg-gray-200 mb-6 overflow-hidden border-4 border-gray-100 shadow-lg relative">
-                        <img src="https://placehold.co/400x400/e2e8f0/64748b?text=Photo" alt="평주영 강사" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">평주영 강사</h3>
-                    <p class="text-gold-600 font-medium text-sm mb-3">영상 제작 / 브랜딩 콘텐츠</p>
-                    <p class="text-gray-600 text-sm px-4">유튜브 CF 제작 및 미드저니·캔바 활용 홍보영상 마스터</p>
-                </div>
-                
-                <!-- Instructor 2 -->
-                <div class="text-center fade-in-up" style="transition-delay: 0.1s;">
-                    <div class="w-40 h-40 mx-auto rounded-full bg-gray-200 mb-6 overflow-hidden border-4 border-gray-100 shadow-lg relative">
-                        <img src="https://placehold.co/400x400/e2e8f0/64748b?text=Photo" alt="이지혜 강사" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">이지혜 강사</h3>
-                    <p class="text-gold-600 font-medium text-sm mb-3">기획 / 문서 자동화</p>
-                    <p class="text-gray-600 text-sm px-4">정부과제 사업계획서 및 NotebookLM 제안서·강의자료</p>
-                </div>
-                
-                <!-- Instructor 3 -->
-                <div class="text-center fade-in-up" style="transition-delay: 0.2s;">
-                    <div class="w-40 h-40 mx-auto rounded-full bg-gray-200 mb-6 overflow-hidden border-4 border-gray-100 shadow-lg relative">
-                        <img src="https://placehold.co/400x400/e2e8f0/64748b?text=Photo" alt="배소민 강사" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">배소민 강사</h3>
-                    <p class="text-gold-600 font-medium text-sm mb-3">출판 / 스마트워크</p>
-                    <p class="text-gray-600 text-sm px-4">AI 전자책 출간 및 구글 워크스페이스(제미나이) 실무 세팅</p>
-                </div>
-                
-                <!-- Instructor 4 -->
-                <div class="text-center fade-in-up" style="transition-delay: 0.3s;">
-                    <div class="w-40 h-40 mx-auto rounded-full bg-gray-200 mb-6 overflow-hidden border-4 border-gray-100 shadow-lg relative">
-                        <img src="https://placehold.co/400x400/e2e8f0/64748b?text=Photo" alt="조효원 강사" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">조효원 강사</h3>
-                    <p class="text-gold-600 font-medium text-sm mb-3">웹 구축 / 업무자동화</p>
-                    <p class="text-gray-600 text-sm px-4">노코딩 홈페이지 제작 및 나만의 AI 업무자동화 에이전트 구축</p>
-                </div>
-            </div>
+    <section class="section" id="teachers">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">MEET YOUR INSTRUCTORS</span>
+          <h2>혼자 막혔던 순간에,<br>함께할 네 명의 강사.</h2>
+          <p>
+            분야별 담당 강사와 함께, 아이디어를 구체적인 결과물로 바꿉니다.
+          </p>
         </div>
+
+        <div class="teachers" id="teacher-grid"></div>
+      </div>
     </section>
 
-    <section class="py-20 bg-gray-50 border-t border-gray-200">
-        <div class="max-w-4xl mx-auto px-6 fade-in-up">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">교육 상세 안내</h2>
-            
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                <table class="w-full text-left border-collapse">
-                    <tbody>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 w-1/3 md:w-1/4 font-bold text-gray-700">접수기간</th>
-                            <td class="py-4 px-6 text-gray-900 font-semibold text-red-600">2027년 1월 26일(화) ~ 1월 30일(토)</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 font-bold text-gray-700">교육일정</th>
-                            <td class="py-4 px-6 text-gray-900">2027년 2월 11일(목) ~ 3월 18일(목), 총 5주간</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 font-bold text-gray-700">교육시간</th>
-                            <td class="py-4 px-6 text-gray-900">매주 저녁 9시 ~ 11시</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 font-bold text-gray-700">교육방법</th>
-                            <td class="py-4 px-6 text-gray-900">Zoom 실시간 원격 강의 + 실습</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 font-bold text-gray-700">수강료</th>
-                            <td class="py-4 px-6 text-gray-900 font-bold text-lg">200,000원</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 font-bold text-gray-700">정원</th>
-                            <td class="py-4 px-6 text-gray-900">선착순 20명 마감</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <th class="py-4 px-6 bg-gray-50 font-bold text-gray-700">참여 대상</th>
-                            <td class="py-4 px-6 text-gray-900">AISH 중급과정 회원</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <section class="section light" id="information">
+      <div class="wrap info-grid reveal">
+        <div class="section-head">
+          <span class="eyebrow">PROGRAM DETAILS</span>
+          <h2>하루의 끝, 두 시간.<br>내일의 실력이 됩니다.</h2>
+          <p>
+            퇴근 후 편안한 공간에서 참여하세요.<br>
+            배우고, 만들고, 질문하는 저녁입니다.
+          </p>
         </div>
+
+        <div>
+          <table aria-label="스페셜 Expert 교육 안내">
+            <tbody>
+              <tr>
+                <th scope="row">접수기간</th>
+                <td>2027년 1월 26일(화) ~ 1월 30일(토)</td>
+              </tr>
+              <tr>
+                <th scope="row">교육일정</th>
+                <td>2027년 2월 11일(목) ~ 3월 18일(목), 5주간</td>
+              </tr>
+              <tr>
+                <th scope="row">교육시간</th>
+                <td>저녁 9시 ~ 11시</td>
+              </tr>
+              <tr>
+                <th scope="row">교육방법</th>
+                <td>Zoom 실시간 원격 강의 + 실습</td>
+              </tr>
+              <tr>
+                <th scope="row">수강료</th>
+                <td><strong>200,000원</strong></td>
+              </tr>
+              <tr>
+                <th scope="row">정원</th>
+                <td>선착순 20명</td>
+              </tr>
+              <tr>
+                <th scope="row">강사진</th>
+                <td>평주영, 이지혜, 배소민, 조효원</td>
+              </tr>
+              <tr>
+                <th scope="row">교육목적</th>
+                <td>핵심 전문 강의를 통한 전문가(Expert) 훈련</td>
+              </tr>
+              <tr>
+                <th scope="row">대상</th>
+                <td>AISH 중급과정을 수료했거나 수강 중인 회원</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="small-note">
+            ※ 과정별 수업일 및 상세 시간표는 별도 안내 예정입니다.
+          </p>
+
+          <!--
+            운영 전 확인:
+            위 기간에는 목요일이 6회 포함됩니다.
+            실제 5주 수업일/휴강일을 확정하여 반영하세요.
+          -->
+        </div>
+      </div>
     </section>
 
-    <section id="apply-section" class="py-24 bg-navy-900 relative">
-        <div class="max-w-3xl mx-auto px-6 relative z-10 fade-in-up">
-            <div class="text-center mb-10 text-white">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">스페셜 Expert 과정 신청하기</h2>
-                <p class="text-gold-400 font-semibold text-lg bg-navy-800 inline-block px-6 py-2 rounded-full border border-gold-500/30">
-                    정원 20명 · 선착순 마감 · 수강료 200,000원
-                </p>
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-                <form id="applicationForm" class="space-y-8" novalidate>
-                    <div>
-                        <label for="userName" class="block text-gray-800 font-bold mb-2">성명 <span class="text-red-500">*</span></label>
-                        <input type="text" id="userName" name="userName" required placeholder="홍길동" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-navy-900 focus:ring-2 focus:ring-navy-900/20 outline-none transition bg-gray-50 focus:bg-white">
-                        <p class="error-message" id="error-userName">성명을 입력해주세요.</p>
-                    </div>
-
-                    <div>
-                        <label for="userPhone" class="block text-gray-800 font-bold mb-2">연락처 <span class="text-red-500">*</span></label>
-                        <input type="tel" id="userPhone" name="userPhone" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-navy-900 focus:ring-2 focus:ring-navy-900/20 outline-none transition bg-gray-50 focus:bg-white">
-                        <p class="text-sm text-gray-500 mt-1">숫자와 하이픈(-)을 포함하여 입력해주세요.</p>
-                        <p class="error-message" id="error-userPhone">올바른 연락처 형식을 입력해주세요.</p>
-                    </div>
-
-                    <div>
-                        <label for="userEmail" class="block text-gray-800 font-bold mb-2">이메일 <span class="text-red-500">*</span></label>
-                        <input type="email" id="userEmail" name="userEmail" required placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-navy-900 focus:ring-2 focus:ring-navy-900/20 outline-none transition bg-gray-50 focus:bg-white">
-                        <p class="error-message" id="error-userEmail">올바른 이메일 주소를 입력해주세요.</p>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-800 font-bold mb-3">참가 과정 선택 (1개만 선택 가능) <span class="text-red-500">*</span></label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="courseCheckboxes">
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="1. 사업계획서(이지혜)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">1. 회사 정부과제 사업계획서 전문가 되기 <span class="text-gray-400 block text-xs mt-0.5">(이지혜 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="2. 유튜브CF(평주영)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">2. 회사제품 유튜브 CF 동영상 제작하기 <span class="text-gray-400 block text-xs mt-0.5">(평주영 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="3. 전자책(배소민)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">3. AI로 5주 만에 전자책 출간하기 <span class="text-gray-400 block text-xs mt-0.5">(배소민 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="4. 홈페이지(조효원)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">4. AI 회사 홈페이지·랜딩페이지 완성하기 <span class="text-gray-400 block text-xs mt-0.5">(조효원 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="5. 업무자동화(조효원)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">5. AI 업무자동화 에이전트 완성하기 <span class="text-gray-400 block text-xs mt-0.5">(조효원 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="6. NotebookLM(이지혜)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">6. NotebookLM 활용 제안서·강의자료 만들기 <span class="text-gray-400 block text-xs mt-0.5">(이지혜 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="7. 구글워크스페이스(배소민)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">7. 구글 워크스페이스(제미나이) 정복하기 <span class="text-gray-400 block text-xs mt-0.5">(배소민 강사)</span></span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition">
-                                <input type="radio" name="course" value="8. 홍보영상(평주영)" class="mt-1 w-4 h-4 border-gray-300 text-gold-500 focus:ring-gold-500">
-                                <span class="text-sm font-medium text-gray-700">8. 미드저니·캔바 활용 홍보영상 만들기 <span class="text-gray-400 block text-xs mt-0.5">(평주영 강사)</span></span>
-                            </label>
-                        </div>
-                        <p class="error-message" id="error-course">과정을 1개 선택해주세요.</p>
-                    </div>
-
-                    <div class="pt-4 border-t border-gray-100">
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" id="privacyConsent" name="privacyConsent" required class="mt-1 w-5 h-5 rounded border-gray-300 text-gold-500 focus:ring-gold-500">
-                            <span class="text-sm text-gray-600">
-                                (필수) 과정 안내 및 원활한 수강 진행을 위해 개인정보(이름, 연락처, 이메일)를 수집 및 이용하는 것에 동의합니다. 수집된 정보는 교육 종료 후 파기됩니다.
-                            </span>
-                        </label>
-                        <p class="error-message" id="error-privacyConsent">개인정보 수집 및 이용에 동의해주세요.</p>
-                    </div>
-
-                    <button type="submit" class="w-full bg-navy-900 hover:bg-navy-800 text-white font-bold text-xl py-4 rounded-xl shadow-lg transition-transform transform hover:-translate-y-1 mt-6">
-                        신청 완료하기
-                    </button>
-                </form>
-
-                <!-- Success Message -->
-                <div id="successMessage" class="hidden text-center py-10">
-                    <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="ph-bold ph-check text-4xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">신청이 접수되었습니다!</h3>
-                    <p class="text-gray-600 mb-6">입력하신 연락처로 수강료 입금 계좌 및 Zoom 접속 안내를 문자로 발송해 드리겠습니다.<br>AISH와 함께 Expert로 거듭날 당신을 응원합니다.</p>
-                </div>
-            </div>
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">THE AISH DIFFERENCE</span>
+          <h2>듣고 끝나는 강의에서,<br>완성하는 경험으로.</h2>
         </div>
+
+        <div class="features">
+          <article class="feature reveal">
+            <span class="feature-no">01</span>
+            <h3>예제가 아닌,<br>내 업무를 완성합니다</h3>
+            <p>
+              내 회사·내 브랜드를 실습 주제로 삼습니다.
+              수업에서 만든 결과물이 바로 다음 업무의 출발점이 됩니다.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature-no">02</span>
+            <h3>이동 없이,<br>저녁의 두 시간을 알차게</h3>
+            <p>
+              저녁 9시, 집에서 Zoom으로 접속하세요.
+              실시간으로 함께 만들고, 궁금한 순간 바로 질문합니다.
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <span class="feature-no">03</span>
+            <h3>중급 회원 20명,<br>한 단계 더 깊은 실습</h3>
+            <p>
+              기초 다음이 필요한 회원을 위한 심화 커리큘럼.
+              소수 정예로 꼼꼼한 실습 피드백을 받습니다.
+            </p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <footer class="bg-gray-900 text-gray-400 py-12 text-sm text-center">
-        <div class="max-w-4xl mx-auto px-6">
-            <h4 class="text-white font-bold text-lg mb-4">AISH 교육협회</h4>
-            <div class="mb-6 flex flex-col md:flex-row justify-center gap-2 md:gap-6">
-                <span>문의처: 02-000-0000 (평일 10:00~17:00)</span>
-                <span class="hidden md:inline">|</span>
-                <span>이메일: aish_edu@example.com</span>
-            </div>
-            <p>&copy; 2027 AISH Education Association. All rights reserved.</p>
-        </div>
-    </footer>
+    <section class="apply-section" id="apply">
+      <div class="wrap apply-grid">
+        <div class="apply-intro reveal">
+          <span class="eyebrow">YOUR EXPERT JOURNEY STARTS HERE</span>
 
-    <div id="stickyCTA" class="fixed bottom-0 left-0 w-full p-4 bg-white/90 backdrop-blur border-t border-gray-200 z-50 transform translate-y-full transition-transform duration-300 md:hidden shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-        <a href="#apply-section" class="block w-full bg-gold-500 text-navy-900 text-center font-bold text-lg py-3 rounded-xl shadow-lg">
-            신청하기
-        </a>
+          <h2>
+            다음 결과물의 주인공은,<br>
+            <em>바로 당신입니다.</em>
+          </h2>
+
+          <p>
+            ‘언젠가 해봐야지’ 생각했던 그 일.<br>
+            이번에는 AISH와 함께 완성해 보세요.
+          </p>
+
+          <div class="apply-facts">
+            <div>
+              <b>20명</b>
+              <small>중급과정 회원 전용</small>
+            </div>
+            <div>
+              <b>5주</b>
+              <small>실전 중심 집중 과정</small>
+            </div>
+            <div>
+              <b>8개</b>
+              <small>전문 교육과정</small>
+            </div>
+          </div>
+
+          <p>
+            접수기간 <strong style="color:#fff">2027.1.26~1.30</strong><br>
+            <small>선착순 정원 마감 시 접수가 조기 종료됩니다.</small>
+          </p>
+        </div>
+
+        <div class="form-card">
+          <h3>스페셜 Expert 과정 신청하기</h3>
+          <p class="form-summary">
+            정원 20명 · 선착순 마감 · 수강료 200,000원
+          </p>
+
+          <form id="apply-form" novalidate>
+            <div class="required-note">
+              <b>신청자 정보</b>
+              <small><span class="required">*</span> 필수 입력</small>
+            </div>
+
+            <div class="field">
+              <label for="full-name">
+                성명<span class="required">*</span>
+              </label>
+              <input
+                id="full-name"
+                name="name"
+                autocomplete="name"
+                placeholder="성함을 입력해주세요"
+                required
+                maxlength="50"
+                aria-describedby="name-error"
+              >
+              <p class="error" id="name-error"></p>
+            </div>
+
+            <div class="field">
+              <label for="phone">
+                연락처<span class="required">*</span>
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="010-0000-0000"
+                required
+                maxlength="13"
+                aria-describedby="phone-error"
+              >
+              <p class="error" id="phone-error"></p>
+            </div>
+
+            <div class="field">
+              <label for="email">
+                이메일<span class="required">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="example@email.com"
+                required
+                maxlength="254"
+                aria-describedby="email-error"
+              >
+              <p class="error" id="email-error"></p>
+            </div>
+
+            <fieldset id="course-fieldset" aria-describedby="courses-error">
+              <legend>
+                참가 과정 선택<span class="required">*</span>
+                <span class="legend-help">1개만 선택 가능</span>
+              </legend>
+
+              <div class="choices" id="course-choices"></div>
+              <p class="error" id="courses-error"></p>
+            </fieldset>
+
+            <label class="consent" for="consent">
+              <input
+                id="consent"
+                name="consent"
+                type="checkbox"
+                required
+                aria-describedby="consent-error"
+              >
+              <span>
+                개인정보 수집·이용에 동의합니다. <b>(필수)</b>
+              </span>
+            </label>
+
+            <p class="error" id="consent-error"></p>
+
+            <details class="privacy">
+              <summary>개인정보 수집·이용 내용 보기</summary>
+              <p>
+                수집 주체: AISH 교육협회<br>
+                수집 항목: 성명, 연락처, 이메일, 선택 과정<br>
+                이용 목적: 수강 신청 확인, 수강료 입금 및 교육·Zoom 접속 안내<br>
+                보유·이용 기간:
+                <span id="retention-text">운영기관 확정 후 안내 예정</span><br>
+                동의를 거부할 수 있으며, 거부 시 신청이 제한됩니다.
+              </p>
+            </details>
+
+            <button class="button submit" type="submit" id="submit-button">
+              신청 완료하기
+              <span aria-hidden="true">↗</span>
+            </button>
+
+            <p class="form-notice" id="mode-notice"></p>
+
+            <div
+              class="status"
+              id="form-status"
+              role="status"
+              aria-live="polite"
+              tabindex="-1"
+            ></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="brand" aria-label="AISH 교육협회 로고 교체 영역">
+        <strong>AISH<span style="color:#ad8752">.</span></strong>
+        <small>교육협회<br>배움을 실력으로 연결합니다</small>
+      </div>
+
+      <div class="footer-details">
+        <p>
+          문의 전화: [전화번호 입력]
+          &nbsp; | &nbsp;
+          이메일: [이메일 주소 입력]
+        </p>
+        <p>© 2027 AISH 교육협회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-bar" id="mobile-bar">
+    <div>
+      <small>회원 전용 · 선착순 20명</small>
+      <strong>스페셜 Expert 과정</strong>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+    <a class="button" href="#apply">
+      신청하기
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+  <script>
+    'use strict';
 
-            document.querySelectorAll('.fade-in-up').forEach(element => {
-                observer.observe(element);
-            });
+    // ===== 운영 설정: Google Apps Script 웹 앱 배포 URL(/exec)을 아래에 입력 =====
+    // URL과 개인정보 보유기간을 모두 설정하기 전에는 개인정보를 전송하지 않습니다.
+    const CONFIG = {
+      appsScriptUrl: '',
+      privacyRetention: '', // 운영기관이 확정한 보유·이용 기간 입력
+      registrationOpens: '2027-01-26T00:00:00+09:00',
+      registrationCloses: '2027-01-31T00:00:00+09:00'
+    };
 
-            const heroSection = document.querySelector('header');
-            const stickyCTA = document.getElementById('stickyCTA');
-            
-            window.addEventListener('scroll', () => {
-                const scrollPos = window.scrollY;
-                const heroBottom = heroSection.offsetHeight;
-                
-                if (scrollPos > heroBottom / 2) {
-                    stickyCTA.classList.remove('translate-y-full');
-                } else {
-                    stickyCTA.classList.add('translate-y-full');
-                }
-            });
+    const courses = [
+      {
+        id: 1,
+        icon: '▤',
+        name: '회사 정부과제 사업계획서 전문가 되기',
+        teacher: '이지혜',
+        desc: '사업의 강점을 정리하고, AI와 함께 문제 정의부터 실행 계획까지 설득력 있는 문서로 구성합니다.',
+        result: '우리 회사 정부과제 사업계획서 초안'
+      },
+      {
+        id: 2,
+        icon: '▷',
+        name: '회사제품 유튜브 CF 동영상 제작하기',
+        teacher: '평주영',
+        desc: '제품의 매력을 한 편의 이야기로. 광고 콘셉트와 대본을 만들고 유튜브용 CF 영상으로 연결합니다.',
+        result: '우리 제품을 소개하는 유튜브 CF 영상'
+      },
+      {
+        id: 3,
+        icon: '▥',
+        name: 'AI로 5주 만에 교보문고에 내 이름으로 전자책 출간하기',
+        teacher: '배소민',
+        desc: '내 경험을 목차와 원고로 풀어내고, 표지 제작부터 교보문고 전자책 출간 절차까지 실습합니다.',
+        result: '내 이름의 전자책 원고·표지와 출간 신청 자료'
+      },
+      {
+        id: 4,
+        icon: '▱',
+        name: '초보자도 AI로 회사 홈페이지·랜딩페이지 1시간 만에 완성하기',
+        teacher: '조효원',
+        desc: '코딩이 낯설어도 시작할 수 있습니다. AI와 함께 소개 문구와 페이지를 만들고 신청 동선까지 구성합니다.',
+        result: '회사 소개 홈페이지 또는 신청형 랜딩페이지'
+      },
+      {
+        id: 5,
+        icon: '⌘',
+        name: 'AI 업무자동화 에이전트 완성하기',
+        teacher: '조효원',
+        desc: '매번 반복하는 업무를 작은 단계로 나누고, 입력부터 결과 정리까지 이어지는 자동화 흐름을 만듭니다.',
+        result: '내 반복 업무를 처리하는 AI 에이전트'
+      },
+      {
+        id: 6,
+        icon: '▦',
+        name: 'NotebookLM을 활용한 제안서·강의자료 뚝딱 만들기',
+        teacher: '이지혜',
+        desc: '흩어진 자료를 한곳에 모아 핵심을 찾습니다. 내 자료를 바탕으로 제안 논리와 강의 구성을 빠르게 정리합니다.',
+        result: '출처를 확인할 수 있는 제안서·강의자료 초안'
+      },
+      {
+        id: 7,
+        icon: '⊞',
+        name: '생초보를 위한 구글 워크스페이스(이메일, 구글드라이브, 제미나이) 정복하기',
+        teacher: '배소민',
+        desc: '메일 정리, 파일 공유, AI 활용을 하나의 업무 흐름으로. 기본부터 익혀 나만의 디지털 업무 환경을 만듭니다.',
+        result: '체계적인 메일·드라이브 환경과 Gemini 업무 활용 예시'
+      },
+      {
+        id: 8,
+        icon: '✧',
+        name: '미드저니·캔바·제미나이를 활용한 회사 홍보영상 만들기',
+        teacher: '평주영',
+        desc: '브랜드에 맞는 이미지와 메시지를 만들고, 세 가지 도구를 연결해 우리 회사만의 홍보영상으로 완성합니다.',
+        result: '브랜드 이미지와 회사 소개 홍보영상'
+      }
+    ];
 
-            const form = document.getElementById('applicationForm');
-            const successMessage = document.getElementById('successMessage');
+    document.querySelector('#course-grid').innerHTML = courses.map(c => `
+      <article class="course reveal">
+        <div class="course-top">
+          <span class="icon" aria-hidden="true">${c.icon}</span>
+          <span class="course-no">
+            COURSE ${String(c.id).padStart(2, '0')}
+          </span>
+        </div>
+        <h3>${c.name}</h3>
+        <p class="instructor">담당 강사 <b>${c.teacher}</b></p>
+        <p class="course-desc">${c.desc}</p>
+        <div class="outcome">
+          <small>이런 결과물을 얻어요</small>
+          ${c.result}
+        </div>
+      </article>
+    `).join('');
 
-            const phonePattern = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // 강사 사진 교체:
+    // .portrait를 <img src="..." alt="강사명 프로필 사진">으로 교체하고
+    // 동일 크기/object-fit:cover 적용.
+    // 단일 파일을 유지하려면 사진을 data:image/...;base64,... 형식으로 삽입하세요.
+    const teachers = [
+      {
+        name: '평주영',
+        area: '유튜브 CF 동영상 제작<br>회사 홍보영상 만들기'
+      },
+      {
+        name: '이지혜',
+        area: '정부과제 사업계획서<br>NotebookLM 제안서·강의자료'
+      },
+      {
+        name: '배소민',
+        area: 'AI 전자책 출간<br>구글 워크스페이스 정복'
+      },
+      {
+        name: '조효원',
+        area: 'AI 홈페이지·랜딩페이지 제작<br>AI 업무자동화 에이전트'
+      }
+    ];
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                let isValid = true;
+    document.querySelector('#teacher-grid').innerHTML = teachers.map((t, i) => `
+      <article class="teacher reveal">
+        <div
+          class="portrait"
+          role="img"
+          aria-label="${t.name} 강사 사진 준비 중"
+        >
+          <span>${String(i + 1).padStart(2, '0')}</span>
+          <small>PROFILE PHOTO</small>
+        </div>
+        <div class="teacher-body">
+          <h3>${t.name}<small>강사</small></h3>
+          <p>${t.area}</p>
+          <p class="bio">[강사 한 줄 소개 입력 예정]</p>
+        </div>
+      </article>
+    `).join('');
 
-                const showError = (id, show) => {
-                    document.getElementById(`error-${id}`).style.display = show ? 'block' : 'none';
-                    if(document.getElementById(id)) {
-                        if(show) document.getElementById(id).classList.add('input-error');
-                        else document.getElementById(id).classList.remove('input-error');
-                    }
-                };
+    document.querySelector('#course-choices').innerHTML = courses.map(c => `
+      <label class="choice">
+        <input
+          type="radio"
+          name="courses"
+          required
+          value="${c.id}"
+          aria-describedby="courses-error"
+        >
+        <span>
+          ${c.name}
+          <small>담당 강사 · ${c.teacher}</small>
+        </span>
+      </label>
+    `).join('');
 
-                const nameInput = document.getElementById('userName');
-                if (!nameInput.value.trim()) {
-                    showError('userName', true);
-                    isValid = false;
-                } else {
-                    showError('userName', false);
-                }
+    const form = document.querySelector('#apply-form');
+    const statusBox = document.querySelector('#form-status');
+    const submitButton = document.querySelector('#submit-button');
 
-                const phoneInput = document.getElementById('userPhone');
-                if (!phonePattern.test(phoneInput.value.trim())) {
-                    showError('userPhone', true);
-                    isValid = false;
-                } else {
-                    showError('userPhone', false);
-                }
+    const connected = Boolean(
+      CONFIG.appsScriptUrl && CONFIG.privacyRetention.trim()
+    );
 
-                const emailInput = document.getElementById('userEmail');
-                if (!emailPattern.test(emailInput.value.trim())) {
-                    showError('userEmail', true);
-                    isValid = false;
-                } else {
-                    showError('userEmail', false);
-                }
+    document.querySelector('#mode-notice').textContent = connected
+      ? '입력하신 정보는 수강 신청 및 교육 안내에 사용됩니다.'
+      : '현재 미리보기입니다. 신청 정보를 입력·확인할 수 있으나 실제 접수되거나 전송되지는 않습니다.';
 
-                const checkedCourses = document.querySelectorAll('input[name="course"]:checked');
-                if (checkedCourses.length === 0) {
-                    showError('course', true);
-                    isValid = false;
-                } else {
-                    showError('course', false);
-                }
+    if (CONFIG.privacyRetention) {
+      document.querySelector('#retention-text').textContent =
+        CONFIG.privacyRetention;
+    }
 
-                const privacyConsent = document.getElementById('privacyConsent');
-                if (!privacyConsent.checked) {
-                    showError('privacyConsent', true);
-                    isValid = false;
-                } else {
-                    showError('privacyConsent', false);
-                }
+    const fields = {
+      name: document.querySelector('#full-name'),
+      phone: document.querySelector('#phone'),
+      email: document.querySelector('#email'),
+      consent: document.querySelector('#consent')
+    };
 
-                if (isValid) {
-                    // 구글 스프레드시트 연동용 주석 (필요 시 활성화하여 사용하세요)
-                    /*
-                    const formData = new FormData(form);
-                    const selectedCourse = document.querySelector('input[name="course"]:checked').value;
-                    formData.set('course', selectedCourse); 
+    function setError(key, message) {
+      document.querySelector('#' + key + '-error').textContent = message;
 
-                    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
-                    
-                    const submitBtn = form.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.innerText;
-                    submitBtn.innerText = '신청 중...';
-                    submitBtn.disabled = true;
+      const elements = key === 'courses'
+        ? form.querySelectorAll('[name=courses]')
+        : [fields[key]];
 
-                    fetch(scriptURL, { method: 'POST', body: formData })
-                        .then(response => {
-                            form.style.display = 'none';
-                            successMessage.classList.remove('hidden');
-                        })
-                        .catch(error => {
-                            console.error('Error!', error.message);
-                            alert('오류가 발생했습니다. 다시 시도해주세요.');
-                            submitBtn.innerText = originalText;
-                            submitBtn.disabled = false;
-                        });
-                    */
-                    
-                    // 데모용: 바로 성공 화면으로 전환
-                    form.style.display = 'none';
-                    successMessage.classList.remove('hidden');
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
+      elements.forEach(el => {
+        el.setAttribute('aria-invalid', String(Boolean(message)));
+      });
+    }
 
-            ['userName', 'userPhone', 'userEmail'].forEach(id => {
-                document.getElementById(id).addEventListener('input', function() {
-                    document.getElementById(`error-${this.id}`).style.display = 'none';
-                    this.classList.remove('input-error');
-                });
-            });
-            
-            document.querySelectorAll('input[name="course"]').forEach(cb => {
-                cb.addEventListener('change', () => {
-                    document.getElementById('error-course').style.display = 'none';
-                });
-            });
+    function validate() {
+      const selected = [
+        ...form.querySelectorAll('[name=courses]:checked')
+      ];
 
-            document.getElementById('privacyConsent').addEventListener('change', function() {
-                if(this.checked) document.getElementById('error-privacyConsent').style.display = 'none';
-            });
+      const errors = {
+        name: fields.name.value.trim()
+          ? ''
+          : '성함을 입력해주세요.',
+
+        phone: /^010-\d{4}-\d{4}$/.test(fields.phone.value.trim())
+          ? ''
+          : '연락처를 010-0000-0000 형식으로 입력해주세요.',
+
+        email:
+          fields.email.value.trim() &&
+          fields.email.validity.valid &&
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value.trim())
+            ? ''
+            : '안내받으실 이메일 주소를 정확히 입력해주세요.',
+
+        courses: selected.length === 1
+          ? ''
+          : '참가하고 싶은 과정을 한 개 선택해주세요.',
+
+        consent: fields.consent.checked
+          ? ''
+          : '신청을 위해 개인정보 수집·이용에 동의해주세요.'
+      };
+
+      Object.entries(errors).forEach(([key, value]) => {
+        setError(key, value);
+      });
+
+      const first = Object.keys(errors).find(key => errors[key]);
+
+      if (first) {
+        const target = first === 'courses'
+          ? form.querySelector('[name=courses]')
+          : fields[first];
+
+        target.focus();
+        return false;
+      }
+
+      return true;
+    }
+
+    fields.phone.addEventListener('input', () => {
+      const value = fields.phone.value.replace(/\D/g, '').slice(0, 11);
+
+      fields.phone.value = value.length > 7
+        ? value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7)
+        : value.length > 3
+          ? value.slice(0, 3) + '-' + value.slice(3)
+          : value;
+    });
+
+    form.addEventListener('input', event => {
+      const key = event.target.name;
+
+      if (['name', 'phone', 'email', 'courses', 'consent'].includes(key)) {
+        setError(key, '');
+      }
+    });
+
+    let pending = false;
+    let requestId = '';
+    let lastPayload = '';
+
+    function showStatus(message, kind = '') {
+      statusBox.className = 'status ' + kind;
+      statusBox.textContent = message;
+      statusBox.focus();
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+
+      if (pending) return;
+
+      statusBox.textContent = '';
+
+      if (!validate()) return;
+
+      if (!connected) {
+        showStatus(
+          '입력 확인이 완료되었습니다. 현재 미리보기이므로 실제 신청은 접수되지 않았습니다.'
+        );
+        return;
+      }
+
+      const now = Date.now();
+
+      if (
+        now < Date.parse(CONFIG.registrationOpens) ||
+        now >= Date.parse(CONFIG.registrationCloses)
+      ) {
+        showStatus(
+          '접수기간은 2027년 1월 26일~1월 30일입니다. 접수기간 내에 신청해주세요.',
+          'failure'
+        );
+        return;
+      }
+
+      const selected = [
+        ...form.querySelectorAll('[name=courses]:checked')
+      ].map(el => Number(el.value));
+
+      const payload = {
+        name: fields.name.value.trim(),
+        phone: fields.phone.value.trim(),
+        email: fields.email.value.trim(),
+        courseIds: selected,
+        consent: true,
+        privacyRetention: CONFIG.privacyRetention
+      };
+
+      const signature = JSON.stringify(payload);
+
+      if (signature !== lastPayload) {
+        requestId = crypto.randomUUID();
+        lastPayload = signature;
+      }
+
+      payload.requestId = requestId;
+
+      pending = true;
+      submitButton.disabled = true;
+      submitButton.textContent = '신청을 접수하고 있습니다…';
+
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 25000);
+
+      try {
+        // Google Apps Script 연결 위치:
+        // doPost에서 JSON을 읽고, 저장 성공 시 {ok:true}를 반환하세요.
+        // text/plain으로 전송하여 불필요한 CORS preflight를 피합니다.
+        // mode:'no-cors'는 성공 여부를 검증할 수 없으므로 사용하지 않습니다.
+        const response = await fetch(CONFIG.appsScriptUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+          redirect: 'follow'
         });
-    </script>
+
+        if (!response.ok) {
+          throw new Error('network');
+        }
+
+        const result = await response.json();
+
+        if (result.ok !== true) {
+          const messages = {
+            closed: '접수기간이 종료되었거나 아직 시작되지 않았습니다.',
+            full: '정원 20명이 마감되었습니다. 관심을 보내주셔서 감사합니다.',
+            invalid: '입력 정보를 다시 확인해주세요.',
+            privacy: '개인정보 안내가 변경되었습니다. 새로고침 후 다시 확인해주세요.'
+          };
+
+          showStatus(
+            messages[result.code] ||
+              '접수 여부를 확인하지 못했습니다. 잠시 후 다시 시도해주세요.',
+            'failure'
+          );
+          return;
+        }
+
+        form.reset();
+        requestId = '';
+        lastPayload = '';
+
+        showStatus(
+          '신청이 접수되었습니다. 입력하신 연락처로 수강료 입금 및 Zoom 접속 안내를 드리겠습니다.',
+          'success'
+        );
+      } catch (error) {
+        showStatus(
+          '접수 결과를 확인하지 못했습니다. 입력 내용은 유지됩니다. 잠시 후 다시 시도해주세요. 동일한 내용으로 재시도하면 중복 접수를 방지합니다.',
+          'failure'
+        );
+      } finally {
+        clearTimeout(timer);
+        pending = false;
+        submitButton.disabled = false;
+        submitButton.innerHTML =
+          '신청 완료하기 <span aria-hidden="true">↗</span>';
+      }
+    });
+
+    if ('IntersectionObserver' in window) {
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion');
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove('pending');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: .06
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+          el.classList.add('pending');
+          observer.observe(el);
+        });
+      }
+
+      const bar = document.querySelector('#mobile-bar');
+
+      const formObserver = new IntersectionObserver(entries => {
+        bar.classList.toggle('hide', entries[0].isIntersecting);
+      }, {
+        threshold: 0
+      });
+
+      formObserver.observe(form);
+    }
+
+    /*
+    ===== Google Apps Script 서버 예제: 별도 Apps Script 프로젝트에 아래 코드를 복사 =====
+
+    1. Google 스프레드시트 생성 → 확장 프로그램 → Apps Script.
+
+    2. 스크립트 속성에 SPREADSHEET_ID, PRIVACY_RETENTION을 지정하세요.
+       PRIVACY_RETENTION은 위 CONFIG.privacyRetention과 같은 확정 문구여야 합니다.
+
+    3. initApplications()를 한 번 실행하고 스프레드시트 권한을 승인하세요.
+
+    4. 웹 앱으로 배포(실행 사용자: 소유자 / 접근: 모든 사용자).
+
+    5. 배포 /exec URL을 CONFIG.appsScriptUrl에 입력하세요.
+       호스팅한 실제 도메인에서 응답 JSON 읽기까지 확인하세요.
+       CORS가 차단되는 배포 환경이면 동일 출처 서버 프록시가 필요합니다.
+
+    6. 실제 접수 전 테스트용 복제 시트에서 기간·정원·중복·오류 처리를 검증하세요.
+       정원은 신청자 20명 기준입니다.
+       과정별 정원 및 회원 자격은 별도 운영 확인 대상입니다.
+       시트를 공개 공유하지 마세요.
+       개인정보 보유기간 종료 시 운영자가 삭제하세요.
+
+    function applicationSheet() {
+      return SpreadsheetApp
+        .openById(
+          PropertiesService.getScriptProperties()
+            .getProperty('SPREADSHEET_ID')
+        )
+        .getSheetByName('신청자');
+    }
+
+    function initApplications() {
+      const book = SpreadsheetApp.openById(
+        PropertiesService.getScriptProperties()
+          .getProperty('SPREADSHEET_ID')
+      );
+
+      if (book.getSheetByName('신청자')) return;
+
+      book.insertSheet('신청자').appendRow([
+        '접수시각',
+        '요청ID',
+        '성명',
+        '연락처',
+        '이메일',
+        '과정번호',
+        '동의',
+        '보유기간'
+      ]);
+    }
+
+    function doPost(e) {
+      const reply = value => ContentService
+        .createTextOutput(JSON.stringify(value))
+        .setMimeType(ContentService.MimeType.JSON);
+
+      const lock = LockService.getScriptLock();
+
+      try {
+        const p = JSON.parse(e.postData.contents);
+
+        if (
+          typeof p.name !== 'string' ||
+          !p.name.trim() ||
+          p.name.length > 50 ||
+          typeof p.phone !== 'string' ||
+          !/^010-\d{4}-\d{4}$/.test(p.phone) ||
+          typeof p.email !== 'string' ||
+          p.email.length > 254 ||
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email) ||
+          p.consent !== true ||
+          typeof p.requestId !== 'string' ||
+          !/^[a-f0-9-]{36}$/i.test(p.requestId) ||
+          !Array.isArray(p.courseIds) ||
+          p.courseIds.length !== 1 ||
+          p.courseIds.some(id => !Number.isInteger(id) || id < 1 || id > 8)
+        ) {
+          return reply({ok: false, code: 'invalid'});
+        }
+
+        const retention = PropertiesService
+          .getScriptProperties()
+          .getProperty('PRIVACY_RETENTION');
+
+        if (!retention || p.privacyRetention !== retention) {
+          return reply({ok: false, code: 'privacy'});
+        }
+
+        lock.waitLock(15000);
+
+        const sheet = applicationSheet();
+        const rows = sheet.getDataRange().getValues().slice(1);
+
+        // 동일 요청 ID 재전송은 이미 저장되었으면 성공 처리합니다.
+        if (rows.some(row => row[1] === p.requestId)) {
+          return reply({ok: true});
+        }
+
+        const now = Date.now();
+
+        if (
+          now < Date.parse('2027-01-26T00:00:00+09:00') ||
+          now >= Date.parse('2027-01-31T00:00:00+09:00')
+        ) {
+          return reply({ok: false, code: 'closed'});
+        }
+
+        if (rows.filter(row => row[1]).length >= 20) {
+          return reply({ok: false, code: 'full'});
+        }
+
+        // 사용자 입력을 텍스트로 저장하여 수식 주입을 방지합니다.
+        const safe = value => "'" + String(value);
+
+        sheet.appendRow([
+          new Date(),
+          p.requestId,
+          safe(p.name.trim()),
+          safe(p.phone),
+          safe(p.email),
+          [...new Set(p.courseIds)].join(', '),
+          '동의',
+          safe(retention)
+        ]);
+
+        SpreadsheetApp.flush();
+
+        return reply({ok: true});
+      } catch (error) {
+        return reply({ok: false, code: 'server_error'});
+      } finally {
+        if (lock.hasLock()) lock.releaseLock();
+      }
+    }
+
+    ===== 서버 예제 끝 =====
+    */
+  </script>
 </body>
 </html>
